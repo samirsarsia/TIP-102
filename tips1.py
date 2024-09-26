@@ -5,9 +5,7 @@ def make_divisible_by_3(nums):
         print(r)
         if r != 0:
             if num > 3:
-                
-            n = n+r 
-        
+                num = num+r 
     return n
 
 
