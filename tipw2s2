@@ -15,7 +15,7 @@ set_times2 = []
 print(lineup(artists1, set_times1))
 print(lineup(artists2, set_times2))
 '''
-'''
+
 def get_artist_info(artist, festival_schedule):
     if artist in festival_schedule:
         return festival_schedule.get(artist)
@@ -32,4 +32,3 @@ festival_schedule = {
 
 print(get_artist_info("Blood Orange", festival_schedule)) 
 print(get_artist_info("Taylor Swift", festival_schedule))  
-'''
