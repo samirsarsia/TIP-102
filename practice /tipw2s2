@@ -16,23 +16,60 @@ print(lineup(artists1, set_times1))
 print(lineup(artists2, set_times2))
 '''
 '''
-def get_artist_info(artist, festival_schedule):
-    if artist in festival_schedule:
-        return festival_schedule.get(artist)
-        
-    else:
-        return festival_schedule.get(artist, {'message': 'Artist not found'})
-            
-festival_schedule = {
-    "Blood Orange": {"day": "Friday", "time": "9:00 PM", "stage": "Main Stage"},
-    "Metallica": {"day": "Saturday", "time": "8:00 PM", "stage": "Main Stage"},
-    "Kali Uchis": {"day": "Sunday", "time": "7:00 PM", "stage": "Second Stage"},
-    "Lawrence": {"day": "Friday", "time": "6:00 PM", "stage": "Main Stage"}
-}
+def find_trending_meme_pairs(meme_posts):
+    pair_count = {}
 
-print(get_artist_info("Blood Orange", festival_schedule)) 
-print(get_artist_info("Taylor Swift", festival_schedule))  
+    for post in meme_posts:
+        for i in range(len(post)):
+            for j in range(len(post)):
+                if i != j:
+                    meme1 = post[i]
+                    meme2 = post[j]
+
+                    if meme1 < meme2:
+                        meme1, meme2 = meme2, meme1
+                    pair = (meme1, meme2)
+                    if pair in pair_count:
+                        pair_count[pair] += 1
+                    else:
+                        pair_count[pair] = 1
+
+    trending_pairs = []
+    for pair in pair_count:
+        if pair_count[pair] >= 2:
+            trending_pairs.append(pair)
+
+    return trending_pairs
+
+
+meme_posts_1 = [
+    ["Dogecoin to the moon!", "Distracted boyfriend"],
+    ["One does not simply walk into Mordor", "Dogecoin to the moon!"],
+    ["Dogecoin to the moon!", "Distracted boyfriend", "One does not simply walk into Mordor"],
+    ["Distracted boyfriend", "One does not simply walk into Mordor"]
+]
+
+meme_posts_2 = [
+    ["Surprised Pikachu", "This is fine"],
+    ["Expanding brain", "Surprised Pikachu"],
+    ["This is fine", "Expanding brain"],
+    ["Surprised Pikachu", "This is fine"]
+]
+
+meme_posts_3 = [
+    ["Y U No?", "First world problems"],
+    ["Philosoraptor", "Bad Luck Brian"],
+    ["First world problems", "Philosoraptor"],
+    ["Y U No?", "First world problems"]
+]
+
+print(find_trending_meme_pairs(meme_posts_1))
+print(find_trending_meme_pairs(meme_posts_2))
+print(find_trending_meme_pairs(meme_posts_3))
+
+
+# [('Distracted boyfriend', 'Dogecoin to the moon!'), ('Dogecoin to the moon!', 'One does not simply walk into Mordor'), ('Distracted boyfriend', 'One does not simply walk into Mordor')]
+# [('Surprised Pikachu', 'This is fine')]
+# [('First world problems', 'Y U No?')]
 '''
-
-
 
